@@ -150,6 +150,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- POPUP at 30% scroll ---
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupCta = document.getElementById('popupCta');
+    let popupShown = false;
+
+    function showPopup() {
+        if (popupShown) return;
+        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        if (scrollPercent >= 30) {
+            popupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            popupShown = true;
+            window.removeEventListener('scroll', showPopup);
+        }
+    }
+
+    function closePopup() {
+        popupOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    window.addEventListener('scroll', showPopup, { passive: true });
+
+    if (popupClose) {
+        popupClose.addEventListener('click', closePopup);
+    }
+
+    // Close on overlay click (outside popup)
+    if (popupOverlay) {
+        popupOverlay.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) closePopup();
+        });
+    }
+
+    // Close on CTA click (scroll to contact)
+    if (popupCta) {
+        popupCta.addEventListener('click', () => {
+            closePopup();
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+    });
+
     // --- ADD spin animation ---
     const style = document.createElement('style');
     style.textContent = `

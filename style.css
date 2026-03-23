@@ -1267,6 +1267,127 @@ h1, h2, h3, h4 {
     color: rgba(255,255,255,0.4);
 }
 
+/* --- POPUP --- */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-2xl);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popup-overlay.active .popup {
+    transform: translateY(0) scale(1);
+}
+
+.popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--gray-400);
+    transition: var(--transition);
+}
+
+.popup-close:hover {
+    background: var(--gray-50);
+    color: var(--gray-700);
+    border-color: var(--gray-300);
+}
+
+.popup-icon {
+    margin-bottom: 20px;
+}
+
+.popup-icon svg {
+    display: inline-block;
+}
+
+.popup-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.popup-title span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.popup-desc {
+    font-size: 1rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.popup-desc strong {
+    color: var(--gray-900);
+}
+
+.popup-sub {
+    font-size: 0.9rem;
+    color: var(--gray-400);
+    margin-bottom: 28px;
+}
+
+.popup-cta {
+    margin-bottom: 16px;
+}
+
+.popup-note {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .popup {
+        padding: 32px 24px;
+    }
+    .popup-title {
+        font-size: 1.3rem;
+    }
+}
+
 /* --- ANIMATIONS --- */
 [data-animate] {
     opacity: 0;
